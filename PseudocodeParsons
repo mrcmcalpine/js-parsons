@@ -1,0 +1,51 @@
+<div id="Y11Parsons-sortableTrash" class="sortable-code"></div> 
+<div id="Y11Parsons-sortable" class="sortable-code"></div> 
+<div style="clear:both;"></div> 
+<p> 
+    <input id="Y11Parsons-feedbackLink" value="Get Feedback" type="button" /> 
+    <input id="Y11Parsons-newInstanceLink" value="Reset Problem" type="button" /> 
+</p> 
+<script type="text/javascript"> 
+(function(){
+  var initial = "#LINE 0: return total ages from an array of integers\n" +
+    "FUNCTION getTotal(ages: Array[] OF INTEGER, size:INTEGER) RETURNS INTEGER\n" +
+    "    DECLARE total: INTEGER #LOCAL VARIABLE\n" +
+    "    DECLARE i: INTEGER\n" +
+    "    total &lt;-- 0\n" +
+    "    FOR i &lt;-- 1 TO size \n" +
+    "        total &lt;-- total + ages[i]\n" +
+    "    NEXT i\n" +
+    "    RETURN total\n" +
+    "END FUNCTION\n" +
+    "finalResult &lt;-- getTotal(A, 5)\n" +
+    "FUNCTION getTotal(ages: Array[] OF INTEGER, size:INTEGER)#distractor\n" +
+    "DECLARE total: REAL #GLOBAK VARIABLE#distractor\n" +
+    "total &lt;--- 1#distractor\n" +
+    "FOR i &lt;-- 1 TO size -1#distractor\n" +
+    "total &lt;-- total + 1#distractor\n" +
+    "i &lt;-- i + 1#distractor\n" +
+    "CALL getTotal()#distractor";
+  var parsonsPuzzle = new ParsonsWidget({
+    "sortableId": "Y11Parsons-sortable",
+    "max_wrong_lines": 10,
+    "grader": ParsonsWidget._graders.LineBasedGrader,
+    "exec_limit": 2500,
+    "can_indent": true,
+    "x_indent": 50,
+    "lang": "en",
+    "show_feedback": true,
+    "python3": true,
+    "trashId": "Y11Parsons-sortableTrash"
+  });
+  parsonsPuzzle.init(initial);
+  parsonsPuzzle.shuffleLines();
+  $("#Y11Parsons-newInstanceLink").click(function(event){ 
+      event.preventDefault(); 
+      parsonsPuzzle.shuffleLines(); 
+  }); 
+  $("#Y11Parsons-feedbackLink").click(function(event){ 
+      event.preventDefault(); 
+      parsonsPuzzle.getFeedback(); 
+  }); 
+})(); 
+</script>
